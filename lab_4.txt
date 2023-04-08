@@ -1,0 +1,911 @@
+STACK PRACTICAL EXCERCISE
+
+2. Write a C++ program to implement a stack using an array with push and pop operations. Check if the stack is full
+
+#include<iostream>
+
+using namespace std;
+
+const int a = 20;
+int arr[a], x=-1;
+
+bool isfull()
+{
+    if(x==a)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool isempty()
+{
+    if (x==0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+int pop()
+{
+    if (isempty())
+    {
+        cout<<"stack underflow : there are no elements in the stack"<<endl;
+    }
+    else
+    {
+        x--;
+        cout<<arr[x]<<" has been popped"<<endl;
+        return arr[x];
+    }
+}
+void push(int y)
+{
+    if(isfull())
+    {
+        cout<<"stack overflow"<<endl;
+        return;
+    }
+    else
+    {
+        arr[x]=y;
+        x++;
+        cout<<"you have just pushed "<<y<<endl;
+        return;
+    }
+}
+int main()
+{
+    cout<<isempty()<<endl;
+    cout<<isfull()<<endl;
+    for(int i=0; i<20; i++)
+    {
+        push(i);
+    }
+    cout<<isfull()<<endl;
+    for(int i=0; i<20; i++)
+    {
+        pop();
+    }
+    cout<<isempty()<<endl;
+}
+3.Write a C++ program to sort a given stack (using an array) using another stack.
+
+#include <iostream>
+
+using namespace std;
+
+const int a = 20;
+int temp[a], sort[a], x=-1, y=-1;
+
+bool is_temp_empty() //check if the temporary stack is empty
+{
+    if (x==-1)
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+bool is_sort_empty()//check if the sorted stack is empty
+{
+    if (y==-1)
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool is_temp_full()//check if temporary stack is full
+{
+    if(x==a)
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+bool is_sort_full()//check if  sorted stack is full
+{
+    if(y==a)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+int pop_temp()//pop element from the temporary stack
+{
+    if(is_temp_empty())
+    {
+        cout<<"stack underflow: the stack is empty";
+        return -1;
+    }
+    else
+    {
+        x--;
+        cout<<temp[x]<<" has just been popped from the temporary stack"<<endl;
+        return (temp[x]);
+    }
+}
+void push_temp(int c)//push elements in the temporary stack
+{
+    if(is_temp_full())
+    {
+        cout<<"stack overflow: there is no space in the stack"<<endl;
+        return;
+    }
+    else if(! is_temp_full())
+    {
+        temp[x]=c;
+        x++;
+        cout<<"you have just pushed "<<c<< " on the temporary stack"<<endl;
+    }
+    return;
+}
+int push_sort()
+{
+    int temp=0;
+    if(is_sort_full())
+    {
+        cout<<"stack overflow: there is no space in the stack"<<endl;
+    }
+    else if(! is_sort_full())
+    {
+        if(is_temp_empty())
+        {
+            cout<<"nothing to push"<<endl;
+        }
+        else{
+            y++;
+            sort[y]=pop_temp();
+            for(int i=0; i<y; i++)//sort the new stack after accepting the element popped from the temporary stack
+            {
+                for(int j=0; j<y; j++)
+                {
+                    if(sort[j]>sort[j+1])
+                    {
+                        temp=sort[j+1];
+                        sort[j+1]=sort[j];
+                        sort[j]=temp;
+                    }
+                }
+            }
+            cout<<"the elements in the sorted stack are: "<<endl;
+            for(int i=0; i<=y; i++)
+            {
+                cout<<sort[i]<<" ";
+            }cout<<endl;
+        }
+    }
+}
+int pop_sort()
+{
+    if(is_sort_empty())
+    {
+        cout<<"stack underflow: there are no elements in the stack anymore"<<endl;
+    }
+    else if(! is_sort_empty())
+    {
+        y--;
+        cout<<sort[y]<<" has just been popped"<<endl;
+        return sort[y];
+    }
+}
+
+int main()
+{
+    /*the main functions are:
+    is_temp_empty(),is_sort_empty()=check if the stack is empty
+    is_temp_full(),is_sort_full()= check check if the stack is full
+    push_temp(int x), push_sort()=push elements to a stack
+    pop_temp(), pop_sort()= pop elements from a stack
+    */
+}
+
+4.Write a program that reads in a sequence of characters and prints them in  reverse order. Use a stack.
+
+#include <iostream>
+
+using namespace std;
+
+const int a = 26;
+char sort[a];
+int y=-1;
+
+bool is_sort_empty()//check if the sorted stack is empty
+{
+    if (y==-1)
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool is_sort_full()//check if  sorted stack is full
+{
+    if(y==a)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+int push_sort(char c)//push the character in the stack
+{
+    int temp=0;
+    if(is_sort_full())
+    {
+        cout<<"stack overflow: there is no space in the stack"<<endl;
+    }
+    else if(! is_sort_full())
+    {
+        y++;
+        sort[y]=c;
+        for(char i=0; i<y; i++)//sort the stack in reversed order. 
+        {
+            for(char j=0; j<y; j++)
+            {
+                if(sort[j]<sort[j+1])
+                {
+                    temp=sort[j+1];
+                    sort[j+1]=sort[j];
+                    sort[j]=temp;
+                }
+            }
+        }
+        cout<<"the elements in the sorted stack are: "<<endl;
+        for(char i=0; i<=y; i++)
+        {
+            cout<<sort[i]<<" ";
+        }
+        cout<<endl;
+        }
+}
+
+int pop_sort()
+{
+    if(is_sort_empty())
+    {
+        cout<<"stack underflow: there are no elements in the stack anymore"<<endl;
+    }
+    else if(! is_sort_empty())
+    {
+        y--;
+        cout<<sort[y]<<" has just been popped"<<endl;
+        return sort[y];
+    }
+}
+
+int main()
+{
+    /*the main functions are:
+    is_sort_empty()=check if stack is empty
+    is_sort_full()= check check if the stack is full
+    push_sort( char c)=push character to the stack
+    pop_sort()= pop characters from the stack
+    */
+   for(char i='a'; i<='z'; i++)
+   {
+    push_sort(i);
+   }
+
+}
+
+
+10.Write a C++ program to sort the elements of a stack (using a linked list)
+
+#include<iostream>
+
+using namespace std;
+
+int stack[5]={0,1,3,5,6}, x=5,z=-1;
+
+
+struct Node{
+    int data;
+    Node* link;
+};
+Node* curr;
+Node* n= new Node;
+
+
+
+bool isempty()
+{
+    if (x==0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+int pop()
+{
+    if (isempty())
+    {
+        cout<<"stack underflow : there are no elements in the stack"<<endl;
+    }
+    else
+    {
+        x--;
+        return stack[x];
+    }
+}
+
+void push()
+{
+    int y=pop();
+    Node* temp= new Node;
+    temp->data=y;
+    curr->link=temp;
+    curr=curr->link;
+    if (y<n->data)
+    {
+        Node* swap= n;
+        n=temp;
+        temp= swap;
+        cout<<n->data<<" ";   
+    }
+    else{
+        n=temp;
+        n->data=y;
+        curr->link=n;
+        curr=curr->link;
+        cout<<n->data<<" "; 
+    }
+
+}
+
+int main()
+{
+    n->data=z;
+    n->link=NULL;
+    curr=n;
+    for(int i=0; i<5; i++)
+    {
+        push();
+    }
+}
+
+LINKED LIST PRACTCAL EXCERCISE
+
+2.Write a C++ program to create a singly linked list of n nodes and display it in reverse order.
+
+#include <iostream>
+
+using namespace std;
+
+
+struct Node
+{
+    int data;
+    Node* link;
+};
+Node* head = NULL;
+
+void reverselist()
+{
+    Node* head = NULL;
+    Node *p, *c, *n;
+    p=NULL;
+    c=head;
+    while(c!=NULL)
+    {
+        n=c->link;
+        c->link=p;
+        p=c;
+        c=n;
+        cout<<n->data<<" ";
+    }
+    head=p;
+}
+int main()
+{
+    reverselist();
+}
+
+4.Write a C++ program to insert a new node at the beginning of a Singly Linked List.
+
+#include<iostream>
+
+using namespace std;
+
+struct Node
+{
+    int data;
+
+    Node* link;
+};
+
+Node *h= NULL;
+
+void insert_front(int x)
+{
+    Node* New= new Node;
+    New->data = x;
+    New->link =h;
+    h=New;
+};
+
+void print_list()
+{
+    while(h!=NULL)
+    {
+        cout<<h->data<<" ";
+        h=h->link;
+    }
+}
+
+int main()
+{
+    insert_front(10);
+    insert_front(100);
+    insert_front(40);
+    print_list();
+    return 0;
+}
+
+6.Write a C++ program to find the middle element of a given Linked List.
+
+
+#include <iostream>
+using namespace std;
+ 
+class Node {
+public:
+    int data;
+    Node* next;
+};
+ 
+class NodeOperation {
+public:
+    void pushNode(class Node** head_ref, int data_val)
+    {
+        class Node* new_node = new Node();
+        new_node->data = data_val;
+        new_node->next = *head_ref;
+        *head_ref = new_node;
+    }
+
+    void printNode(class Node* head)
+    {
+        while (head != NULL) {
+            cout << head->data << "->";
+            head = head->next;
+        }
+        cout << "NULL" << endl;
+    }
+
+    int getLen(class Node* head)
+    {
+        int len = 0;
+        class Node* temp = head;
+        while (temp) {
+            len++;
+            temp = temp->next;
+        }
+        return len;
+    }
+ 
+    void printMiddle(class Node* head)
+    {
+ 
+        if (head) {
+            int len = getLen(head);
+            class Node* temp = head;
+
+            int midIdx = len / 2;
+            while (midIdx--) {
+                temp = temp->next;
+            }
+            cout << "The middle element is [" << temp->data
+                 << "]" << endl;
+        }
+    }
+};
+ 
+int main()
+{
+    class Node* head = NULL;
+    class NodeOperation* temp = new NodeOperation();
+    for (int i = 5; i > 0; i--) {
+        temp->pushNode(&head, i);
+        temp->printNode(head);
+        temp->printMiddle(head);
+    }
+    return 0;
+}
+
+8.Write a C++ program to delete first node of a given Singly Linked List
+
+
+#include<iostream>
+
+using namespace std;
+
+struct Node{
+    int data;
+    Node* next;
+};
+    Node* h;
+    Node* n;
+    Node* t;
+    Node* b;
+
+
+
+void delete_list(int num)
+{
+    Node * delet_ptr= NULL;
+    t=h;
+    n=h;
+    while( n != NULL && n->data != num)
+    {
+        t= n;
+        n= n->next;
+    }
+    if (n==NULL)
+    {
+        cout<<"the data you provided was not found"<<endl;
+        delete delet_ptr;
+    }
+    else if ( n->data == num)
+    {
+        delet_ptr= n;
+        n= n->next;
+        t->next = n;
+        delete delet_ptr;
+    }
+}
+
+void print_list(Node* list)
+{
+    while (list != NULL)
+    {
+        cout<<list->data<<endl;
+        list = list->next;
+
+    }
+
+}
+
+
+int main()
+{
+    n= new Node;
+    n->data= 0;
+    h=n;
+    t=n;
+
+    n= new Node;
+    n-> data = 2;
+    t->next=n;
+    t=t->next;
+
+    n= new Node;
+    n-> data = 3;
+    t->next=n;
+    t=t->next;
+
+    n= new Node;
+    n->data = 4;
+    t->next= n;
+    t=t->next;
+
+
+    n=new Node;
+    n->data = 5;
+    t->next=n;
+    n->next = NULL;
+    delete_list(0);
+
+    
+    return 0;
+
+}
+
+
+13. Write a program in C++ to create a doubly linked list of n nodes and count the number of nodes.
+
+#include <iostream>
+
+using namespace std;
+
+struct Node
+{
+    int data;
+    Node* next;
+    Node* previous;
+};
+
+int count_list(Node* n)
+{
+    int x=1;
+    while(n!= NULL)
+    {
+        n=n->next;
+    }
+    return x;
+}
+
+void insert(int x)
+{
+    Node * N= new Node;
+    N->data=x;
+}
+
+int main()
+{
+    Node * head;
+    Node* tail;
+    
+    Node* node= new Node;
+    node->data=10;
+    node->next= NULL;
+    node->previous= NULL;
+    head= node;
+    tail= node;
+    
+    int y= int(count_list(head));
+    cout<<y;
+
+}
+
+
+16.Write a C++ program to find the middle element of a given Doubly Linked List.
+
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+        int data;
+        Node *next;
+};
+
+class NodeOperation{
+  public:
+
+    // Function to add a new node
+    void pushNode(class Node** head_ref,int data_val){
+
+        // Allocate node
+        class Node *new_node = new Node();
+
+         // Put in the data
+        new_node->data = data_val;
+
+        // Link the old list of the new node
+        new_node->next = *head_ref;
+
+        // move the head to point to the new node
+        *head_ref = new_node;
+    }
+};
+
+int main() {
+class Node *head = NULL;
+    class NodeOperation *temp = new NodeOperation();
+    for(int i=5; i>0; i--){
+        temp->pushNode(&head, i);
+    }
+    vector<int>v;
+    while(head!=NULL){
+     v.push_back(head->data);
+     head=head->next;
+    }
+    cout<<"Middle Value Of this Linked List is :";
+    cout<<v[v.size()/2]<<endl;
+    return 0;
+}
+
+
+
+EXCERCISE
+
+
+1.INFIX TO POSTFIX
+
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int priority (char alpha){
+    if(alpha == '+' || alpha =='-')
+        return 1;
+ 
+    if(alpha == '*' || alpha =='/')
+        return 2;
+ 
+    if(alpha == '^')
+        return 3;
+
+ 
+    return 0;
+}
+string convert(string infix)
+{
+    int i = 0;
+    string postfix = "";
+
+    stack <int>s;
+
+    while(infix[i]!='\0')
+    {
+
+        if(infix[i]>='a' && infix[i]<='z'|| infix[i]>='A'&& infix[i]<='Z')          
+        {
+            postfix += infix[i];
+            i++;
+        }
+
+        else if(infix[i]=='(')
+        {
+            s.push(infix[i]);
+            i++;
+        }
+
+        else if(infix[i]==')')
+        {
+            while(s.top()!='('){
+                postfix += s.top();
+                s.pop();
+            }
+            s.pop();
+            i++;
+        }
+        else            
+        {
+            while (!s.empty() && priority(infix[i]) <= priority(s.top())){
+                postfix += s.top();
+                s.pop();
+            }
+            s.push(infix[i]);
+            i++;
+        }
+    }
+    while(!s.empty()){
+        postfix += s.top();
+        s.pop();
+    }
+
+
+    cout << "Postfix is : " << postfix;  
+    return postfix;
+}
+
+int main()
+{
+    string infix = "(a+b)/c-d/f*e"; 
+    string postfix;
+    postfix = convert(infix);
+    
+    return 0;
+}
+
+2. POSTFIX TO INFIX
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+bool isOperand(char x)
+{
+   return (x >= 'a' && x <= 'z') ||
+          (x >= 'A' && x <= 'Z');
+}
+ 
+string getInfix(string exp)
+{
+    stack<string> s;
+ 
+    for (int i=0; exp[i]!='\0'; i++)
+    {
+        if (isOperand(exp[i]))
+        {
+           string op(1, exp[i]);
+           s.push(op);
+        }
+
+        else
+        {
+            string op1 = s.top();
+            s.pop();
+            string op2 = s.top();
+            s.pop();
+            s.push("(" + op2 + exp[i] +
+                   op1 + ")");
+        }
+    }
+
+    return s.top();
+}
+ 
+
+int main()
+{
+    string exp = "ab/cd/+";
+    cout << getInfix(exp);
+    return 0;
+}
+
+
+3. PREFIX TO INFIX
+
+#include <iostream>
+#include <stack>
+using namespace std;
+ 
+bool isOperator(char x) {
+  switch (x) {
+  case '+':
+  case '-':
+  case '/':
+  case '*':
+  case '^':
+  case '%':
+    return true;
+  }
+  return false;
+}
+ 
+string preToInfix(string pre_exp) {
+  stack<string> s;
+ 
+  int length = pre_exp.size();
+ 
+
+  for (int i = length - 1; i >= 0; i--) {
+ 
+    if (isOperator(pre_exp[i])) {
+ 
+      string op1 = s.top();   s.pop();
+      string op2 = s.top();   s.pop();
+
+      string temp = "(" + op1 + pre_exp[i] + op2 + ")";
+ 
+
+      s.push(temp);
+    }
+    else {
+ 
+   
+      s.push(string(1, pre_exp[i]));
+    }
+  }
+ 
+
+  return s.top();
+}
+ 
+int main() {
+  string pre_exp = "+*ab*cd";
+  cout << "Infix : " << preToInfix(pre_exp);
+  return 0;
+}
+
+
+
+
+
+
+

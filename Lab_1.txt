@@ -1,0 +1,95 @@
+11. Write C++ program to add two numbers using pointers
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    int x = 10, y = 3;
+    int *a = & x, *b = &y;
+    cout<<*a + *b<<endl;
+    return 0;
+}
+12. Write C++ program to Sum of Array Elements using Pointers
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int arr[5] ={1, 2, 3, 4,5};
+    int *y = arr;
+    int sum =0;
+    for (int i =0; i<5; i++)
+    {
+        sum+=*(y+i);
+    }
+    cout<<sum;
+    return 0;
+}
+13. Write C++ program to find length of string using pointer
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    string x = "Hello World";
+    string *y = &x;
+    cout<<(*y).size();
+    return 0;
+}
+14. Write C++ program to copy one string to another string using pointer
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    string first ="Hello World", second;
+    string *x = &first, *y = &second;
+    *y=*x;
+    cout<<second;
+
+    return 0;
+}
+15. Write C++ program to concatenate two strings using pointer 
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    string X = "Hello ", Y= "World";
+    string *x= &X, *y = &Y;
+    string Z = *x + *y;
+    cout<<Z;
+    return 0;
+}
+bonus:
+
+print 1-10 using while and do_while loops
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    //using while loop
+    int num = 1, num1 =1;
+    while(num<11)
+    {
+        cout<<num;
+        num++;
+    }cout<<endl;
+    //using do while
+    do
+    {
+        cout<<num1;
+        num1++;
+    }while(num1<11);
+    return 0;
+}
+
+
+
