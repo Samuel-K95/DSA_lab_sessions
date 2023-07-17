@@ -1,5 +1,5 @@
-# DSA_lab_sessions
-These are projects from our lab sessions.
+This repository contains different sessions from my data structures and algorithms lab classes. It includes projects and exercises that were completed during the course, covering topics such as sorting algorithms, data structures like linked lists and trees, and more.
 
-If you want to acces My final Project "The travel booking system" please doownload the project.cpp fila and password.txt file together. you can also access the exexutable file with the name Project.exe, but make sure to download the password.txt file and save them in the same location
+One of the main projects included in this repository is a travel booking system. To access the project, please download the "project.cpp" and "password.txt" files together. Alternatively, you can use the pre-compiled executable file "Project.exe", but be sure to download and save the "password.txt" file in the same location. The travel booking system project was completed as the final project for the lab sessions and is designed to allow users to book flights, hotels, and rental cars for their trips.
 
+In addition to the travel booking system project, this repository includes other exercises and projects completed during the lab sessions. These projects cover a range of topics and are designed to help students understand and implement different data structures and algorithms. By exploring this repository, you can gain practical experience working with data structures and algorithms and improve your programming skills.
